@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0.0",
+  "template_version": "1.0.0",
+  "planning": {
+    "horizon_months": 12,
+    "max_data_age_days": 45,
+    "teacher_lead_months": 2,
+    "room_lead_months": 6,
+    "teacher_gap_persistence_months": 2,
+    "room_gap_persistence_months": 2
+  },
+  "scenarios": {
+    "保守": {
+      "renewal_multiplier": 0.9,
+      "enrollment_multiplier": 0.9
+    },
+    "基准": {
+      "renewal_multiplier": 1.0,
+      "enrollment_multiplier": 1.0
+    },
+    "进取": {
+      "renewal_multiplier": 1.1,
+      "enrollment_multiplier": 1.1
+    }
+  },
+  "source": {
+    "metadata": {
+      "sheet": "元数据",
+      "key_column": "字段",
+      "value_column": "值"
+    },
+    "tables": {
+      "enrolled_students": {
+        "sheet": "在读学员",
+        "columns": {
+          "student_id": "学员标识",
+          "campus": "校区",
+          "class_type": "班型",
+          "time_slot": "峰值时段",
+          "renewal_month": "续费月份",
+          "status": "状态"
+        }
+      },
+      "renewal_rates": {
+        "sheet": "续费率",
+        "columns": {
+          "campus": "校区",
+          "class_type": "班型",
+          "renewal_month": "续费月份",
+          "base_rate": "基准续费率"
+        }
+      },
+      "enrollment_plan": {
+        "sheet": "招生计划",
+        "columns": {
+          "campus": "校区",
+          "class_type": "班型",
+          "recruitment_month": "招生月份",
+          "current_target": "本期目标人数",
+          "history_target": "往期目标人数",
+          "history_actual": "往期实际人数",
+          "start_month": "开课月份",
+          "time_slot": "峰值时段"
+        }
+      },
+      "class_rules": {
+        "sheet": "班型规则",
+        "columns": {
+          "class_type": "班型",
+          "target_class_size": "目标班容",
+          "min_class_size": "最小班容",
+          "max_class_size": "最大班容",
+          "teachers_per_class": "每班教师数",
+          "rooms_per_class": "每班教室数",
+          "room_type": "教室类型"
+        }
+      },
+      "teacher_supply": {
+        "sheet": "教师供给",
+        "columns": {
+          "teacher_id": "教师标识",
+          "campus": "校区",
+          "class_type": "班型",
+          "month": "月份",
+          "time_slot": "峰值时段",
+          "max_concurrent_classes": "并发班级上限"
+        }
+      },
+      "room_supply": {
+        "sheet": "教室供给",
+        "columns": {
+          "room_id": "教室标识",
+          "campus": "校区",
+          "room_type": "教室类型",
+          "month": "月份",
+          "time_slot": "峰值时段",
+          "available": "是否可用"
+        }
+      }
+    }
+  }
+}

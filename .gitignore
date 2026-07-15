@@ -1,0 +1,19 @@
+# Local business data and generated outputs must never enter Git.
+data/local/
+outputs/
+*.log
+*.inspect.ndjson
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Node workspace wiring used only for workbook generation.
+node_modules
+
+# macOS / editors
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,5 @@
+interface:
+  display_name: "新东方校区产能规划"
+  short_description: "基于脱敏业务数据测算未来十二个月师资与教室产能缺口"
+  brand_color: "#173F5F"
+  default_prompt: "Use $xdf-plan-campus-capacity to validate a desensitized Excel export and produce an auditable 12-month campus capacity forecast."

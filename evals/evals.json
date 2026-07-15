@@ -1,0 +1,23 @@
+{
+  "skill_name": "xdf-plan-campus-capacity",
+  "evals": [
+    {
+      "id": "synthetic-baseline",
+      "prompt": "使用合成数据测算未来12个月教师和教室产能，并生成审计友好的管理建议。",
+      "files": [
+        "evals/fixtures/synthetic-capacity-input.xlsx"
+      ],
+      "expected_output": [
+        "campus-capacity-result.xlsx",
+        "management-recommendations.md",
+        "message-payload.json"
+      ],
+      "assertions": [
+        "基准情景素养A在2026-09的预测人数为24，计划班级数为3",
+        "基准情景素养B在2026-10的教师缺口为4，教室缺口为2",
+        "每条管理建议包含证据键和人工确认要求",
+        "输出不包含自动发送或自动执行动作"
+      ]
+    }
+  ]
+}
