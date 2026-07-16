@@ -19,6 +19,12 @@
 - 本机业务数据：`data/local/`，已被 Git 忽略
 - 演示输出：`outputs/demo/`，已被 Git 忽略
 
+## 已合并的候选管理动作
+
+`秋季纳新名额测算` 的完整源项目已迁入 Git 忽略的 `data/local/autumn-enrollment-quota/`，可复用口径、数据合同和风险边界已脱敏沉淀为 [候选 Skill 发现记录](docs/discovery/AUTUMN_ENROLLMENT_QUOTA.md)。
+
+当前不将它直接封装为第二个 Skill：源实现含真实姓名、单次手工覆盖和固定日期/单元格，且“续班预估占用”不等于“可纳新名额”。待补齐可售容量与预留名额口径、建立合成评测后再封装。
+
 ## 快速开始
 
 ```bash
