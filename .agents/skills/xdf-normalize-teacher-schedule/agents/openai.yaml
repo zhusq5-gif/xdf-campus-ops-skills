@@ -1,5 +1,5 @@
 interface:
   display_name: "新东方教师课表占档规整"
-  short_description: "把小学素养班级明细转换为教师占档课表和容量差额表"
+  short_description: "整理小学素养教师占档，支持规则/模板优先回传重跑"
   brand_color: "#2F5597"
-  default_prompt: "Use $xdf-normalize-teacher-schedule to validate the local class export, run the baseline schedule, then handle a returned template with an explicit priority switch or a reversible local rule overlay."
+  default_prompt: "Use $xdf-normalize-teacher-schedule when the user supplies an elementary enrichment class export or returns a modified schedule. Confirm campus and data date, run the rule-first baseline, explain the current scheduling logic, require an explicit rule-first/template-first switch before applying template changes, and keep template records separate from reversible local rule overlays."
