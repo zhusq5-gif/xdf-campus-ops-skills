@@ -42,6 +42,11 @@ const OUTPUT_SHEETS = [
   ["假设与版本", ["路径", "值"]],
 ];
 
+const SCHEDULE_INPUT_SHEETS = [
+  ["暑假明细", ["科目(外)", "上课地点(外)", "班级编码", "班级名称（外）", "当前人数(占名额)", "最大人数", "开课日期", "上课时间(外)", "授课教师", "班级课次数", "是否放班", "年级(外)", "轮次", "备注"]],
+  ["秋季明细", ["科目(原)", "上课地点(外)", "班级编码", "班级名称（外）", "当前人数(占名额)", "最大人数", "开课日期", "上课时间(外)", "授课教师", "班级课次数", "是否放班", "年级(外)", "轮次", "备注"]],
+];
+
 function columnName(number) {
   let value = number;
   let result = "";
@@ -171,6 +176,48 @@ function syntheticRows() {
   };
 }
 
+function syntheticScheduleRows() {
+  return {
+    "暑假明细": [
+      ["双语 STEAM", "合成校区", "ST3AS260001", "三年级A班", 11, 20, "2026-07-02", "08:30-10:00", "合成教师甲(1001)", 12, "是", "3年级", "一轮", ""],
+      ["科学思维", "合成校区", "SW4BS260002", "四年级B班", 15, 20, "2026-07-21", "10：20-12：20", "合成教师乙", 15, "是", "4年级", "二轮", ""],
+      ["博学", "合成校区", "BX2AS260003", "二年级A班", 16, 16, "2026-08-11", "13点-15点", "合成教师丙", 12, "是", "2年级", "三轮", ""],
+      ["脑力思维", "合成校区", "NL1CS260004", "一年级基础班", 8, 16, "2026-07-02", "16:00-18:00", "合成教师丁", 12, "是", "1年级", "一轮", ""],
+      ["脑力思维", "合成校区", "NL1AS260005", "一年级A班", 7, 16, "2026-07-21", "16:00-18:00", "合成教师丁", 12, "是", "1年级", "二轮", ""],
+      ["双语 STEAM", "合成校区", "ST4AS260006", "四年级A班", 9, 20, "2026-07-02", "18:20-20:20", "合成教师庚", 12, "是", "4年级", "一轮", "非标准课次测试"],
+      ["双语 STEAM", "合成校区", "ST3BS260007", "三年级B班", 5, 20, "2026-07-21", "13:30-15:30", "合成教师戊", 12, "是", "3年级", "二轮", ""],
+      ["双语 STEAM", "合成校区", "ST3CS260008", "三年级C班", 12, 20, "2026-07-21", "13:30-15:30", "合成教师戊", 12, "是", "3年级", "二轮", ""],
+      ["科学思维", "合成校区", "SW5AS260009", "五年级A班", 10, 20, "2026-08-11", "16:20-18:20", "合成教师己", 15, "是", "5年级", "三轮", ""],
+      ["科学思维", "合成校区", "SW5BS260010", "五年级B班", 10, 20, "2026-08-11", "16:20-18:20", "合成教师己", 15, "是", "5年级", "三轮", ""],
+      ["科学思维", "合成校区", "SW4BS260011", "四年级A班", 14, 20, "2026-08-11", "08:30-10:30", "合成教师辛", 15, "是", "4年级", "三轮", "班名难度冲突测试"],
+      ["双语 STEAM", "合成校区", "ST3AS260012", "S2双语班", 6, 20, "2026-07-02", "10:20-12:20", "合成教师壬", 12, "是", "S2", "一轮", ""],
+      ["博学", "合成校区", "BX3AS260013", "三年级补课班", 8, 20, "2026-07-02", "10:20-12:20", "合成教师癸", 12, "是", "3年级", "一轮", ""],
+      ["博学", "合成校区", "BX3BS260014", "三年级B班", 8, 20, "2026-07-02", "10:20-12:20", "合成教师癸", 12, "取消", "3年级", "一轮", ""],
+      ["双语 STEAM", "其他合成校区", "ST6AS260015", "六年级A班", 18, 20, "2026-07-02", "08:30-10:30", "合成教师外", 15, "是", "6年级", "一轮", ""],
+    ],
+    "秋季明细": [
+      ["双语 STEAM", "合成校区", "ST3AF260101", "三年级A班", 12, 20, "2026-09-05", "每周三18:20-20:20", "合成教师甲", 16, "是", "3年级", "", "动态周三列测试"],
+      ["脑力思维", "合成校区", "NL2CF260102", "二年级基础班", 8, 16, "2026-09-05", "周六08:30-10:30", "合成教师辛", 16, "是", "2年级", "", ""],
+      ["脑力思维", "合成校区", "NL2AF260103", "二年级A班", 7, 16, "2026-09-05", "周日10:20-12:20", "合成教师辛", 16, "是", "2年级", "", ""],
+      ["科学思维", "合成校区", "SW5BF260104", "五年级B班", 20, 20, "2026-09-05", "星期日10:20-12:20", "合成教师乙", 16, "是", "5年级", "", ""],
+      ["双语 STEAM", "合成校区", "ST1AF260105", "一年级A班", 19, 18, "2026-09-05", "周六13:30-15:30", "合成教师丙", 16, "是", "1年级", "", "超售测试"],
+      ["博学", "合成校区", "BX3AF260106", "三年级A班", 9, 20, "2026-09-05", "周四18点-20点", "合成教师丁", 16, "是", "3年级", "", ""],
+      ["双语 STEAM", "合成校区", "ST4BF260107", "四年级B班", 13, 20, "2026-09-05", "周六16:20-18:20", "", 16, "是", "4年级", "", "缺教师测试"],
+      ["博学", "合成校区", "BX4AF260108", "四年级A班", 11, 20, "2026-09-05", "周六18:20-20:20", "合成教师戊", 16, "否", "4年级", "", ""],
+      ["双语 STEAM", "合成校区", "ST3BF260109", "S3双语班", 9, 20, "2026-09-05", "周日13:30-15:30", "合成教师己", 16, "是", "S3", "", ""],
+    ],
+  };
+}
+
+function setupManualScheduleSheet(workbook, name, headers, rows) {
+  const sheet = setupInputSheet(workbook, name, headers, rows.map((row) => [row[0], row[1], "", ...row.slice(3)]));
+  for (let index = 0; index < rows.length; index += 1) {
+    const rowNumber = index + 2;
+    sheet.getRange(`C${rowNumber}`).formulas = [[`=COUNTA(D${rowNumber}:${columnName(headers.length)}${rowNumber})`]];
+  }
+  return sheet;
+}
+
 async function build(root) {
   const skillAssets = path.join(root, ".agents/skills/xdf-plan-campus-capacity/assets");
   const fixtures = path.join(root, "evals/fixtures");
@@ -191,6 +238,37 @@ async function build(root) {
   for (const [name, headers] of INPUT_SHEETS) setupInputSheet(synthetic, name, headers, rows[name]);
   synthetic.worksheets.getItem("续费率").getRange("D2:D3").setNumberFormat("0.0%");
   await saveWorkbook(synthetic, path.join(fixtures, "synthetic-capacity-input.xlsx"));
+
+  await buildScheduleFixtures(root);
+}
+
+async function buildScheduleFixtures(root) {
+  const fixtures = path.join(root, "evals/fixtures");
+  const scheduleInput = Workbook.create();
+  const scheduleRows = syntheticScheduleRows();
+  for (const [name, headers] of SCHEDULE_INPUT_SHEETS) setupInputSheet(scheduleInput, name, headers, scheduleRows[name]);
+  await saveWorkbook(scheduleInput, path.join(fixtures, "synthetic-schedule-input.xlsx"));
+
+  const manual = Workbook.create();
+  setupManualScheduleSheet(
+    manual,
+    "暑假课表",
+    ["科目", "教师", "班量", "一轮08点", "二轮10点", "三轮13点"],
+    [
+      ["双语", "合成计划教师甲", "", "新班ST3A", "", ""],
+      ["思维", "合成计划教师乙", "", "新班NL1", "新班NL2A", "新班NL1B"],
+      ["双语", "合成计划教师丙", "", "3人\nST6AS260099", "", ""],
+      ["博学", "", "", "", "新班BX3A", ""],
+      ["博学", "合成计划教师丁", "", "", "", "新班ST3A"],
+    ],
+  );
+  setupManualScheduleSheet(
+    manual,
+    "秋季课表",
+    ["科目", "教师", "班量", "周三18点", "周六08点", "周日10点"],
+    [["思维", "合成计划教师戊", "", "新班SW3B", "", ""]],
+  );
+  await saveWorkbook(manual, path.join(fixtures, "synthetic-manual-schedule.xlsx"));
 }
 
 async function verify(workbookPath, renderDir) {
@@ -213,9 +291,11 @@ async function verify(workbookPath, renderDir) {
 const [command, first, second] = process.argv.slice(2);
 if (command === "build" && first) {
   await build(path.resolve(first));
+} else if (command === "build-schedule" && first) {
+  await buildScheduleFixtures(path.resolve(first));
 } else if (command === "verify" && first && second) {
   await verify(path.resolve(first), path.resolve(second));
 } else {
-  console.error("用法: workbooks.mjs build <repo-root> | verify <workbook.xlsx> <render-dir>");
+  console.error("用法: workbooks.mjs build <repo-root> | build-schedule <repo-root> | verify <workbook.xlsx> <render-dir>");
   process.exit(2);
 }

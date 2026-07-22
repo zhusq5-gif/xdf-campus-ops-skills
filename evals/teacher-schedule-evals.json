@@ -1,0 +1,29 @@
+{
+  "skill_name": "xdf-normalize-teacher-schedule",
+  "evals": [
+    {
+      "id": "synthetic-schedule-baseline",
+      "prompt": "使用合成班级明细生成教师占档课表、容量差额表和待确认清单。",
+      "files": [
+        "evals/fixtures/synthetic-schedule-input.xlsx",
+        "evals/fixtures/synthetic-manual-schedule.xlsx"
+      ],
+      "expected_output": [
+        "teacher-schedule-result.xlsx",
+        "schedule-review.json"
+      ],
+      "assertions": [
+        "课次非标准班、S2/S3、取消班和补课班不进入正式课表",
+        "同教师同时段唯一高人数班临时入表，同人数冲突不自动选择",
+        "新班NL1为基础，新班NL2A为拔高，新班NL1B进入待确认",
+        "容量仅展示总容量、当前数量和差额，且差额由工作簿公式计算",
+        "校验问题与排除记录分表，容量总览使用难度/班型列名",
+        "多校区管理单元、混合连续课和多人工模板三向对比均可确定性复算",
+        "多教师班级使用唯一匹配的主带课老师，缺失或不匹配时不入表",
+        "rule_first不应用模板删改，template_first应用合规模板删改但不绕过硬约束",
+        "本地规则覆盖可审计可恢复，禁止路径和陈旧基础哈希被阻断",
+        "输出要求人工确认导出后的关班、新开班、换教师和移动时段变化"
+      ]
+    }
+  ]
+}

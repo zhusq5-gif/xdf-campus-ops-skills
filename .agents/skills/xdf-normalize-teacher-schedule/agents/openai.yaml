@@ -1,0 +1,5 @@
+interface:
+  display_name: "新东方教师课表占档规整"
+  short_description: "把小学素养班级明细转换为教师占档课表和容量差额表"
+  brand_color: "#2F5597"
+  default_prompt: "Use $xdf-normalize-teacher-schedule to validate the local class export, run the baseline schedule, then handle a returned template with an explicit priority switch or a reversible local rule overlay."

@@ -10,6 +10,24 @@ from pathlib import Path
 
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
+REQUIRED_BY_SKILL = {
+    "xdf-plan-campus-capacity": [
+        "scripts/plan_capacity.py",
+        "references/data-contract.md",
+        "references/business-rules.md",
+        "references/management-output.md",
+        "assets/capacity-input-template.xlsx",
+        "assets/capacity-output-template.xlsx",
+    ],
+    "xdf-normalize-teacher-schedule": [
+        "scripts/normalize_schedule.py",
+        "scripts/manage_schedule_rules.py",
+        "references/data-contract.md",
+        "references/business-rules.md",
+        "references/output-spec.md",
+    ],
+}
+
 
 def parse_frontmatter(text: str) -> dict[str, str]:
     if not text.startswith("---\n"):
@@ -53,18 +71,19 @@ def validate(skill_dir: Path) -> list[str]:
         errors.append("Skill 中不得保留 TODO")
     if len(text.splitlines()) >= 500:
         errors.append("SKILL.md 必须少于 500 行")
-    required = [
-        skill_dir / "agents" / "openai.yaml",
-        skill_dir / "scripts" / "plan_capacity.py",
-        skill_dir / "references" / "data-contract.md",
-        skill_dir / "references" / "business-rules.md",
-        skill_dir / "references" / "management-output.md",
-        skill_dir / "assets" / "capacity-input-template.xlsx",
-        skill_dir / "assets" / "capacity-output-template.xlsx",
-    ]
+    required = [skill_dir / "agents" / "openai.yaml"]
+    required.extend(skill_dir / relative for relative in REQUIRED_BY_SKILL.get(name, []))
     for path in required:
         if not path.is_file():
             errors.append(f"缺少资源: {path.relative_to(skill_dir)}")
+    openai_yaml = skill_dir / "agents" / "openai.yaml"
+    if openai_yaml.is_file():
+        yaml_text = openai_yaml.read_text(encoding="utf-8")
+        for field in ("display_name:", "short_description:", "default_prompt:"):
+            if field not in yaml_text:
+                errors.append(f"agents/openai.yaml 缺少 {field[:-1]}")
+        if f"${name}" not in yaml_text:
+            errors.append("default_prompt 必须显式触发当前 Skill")
     return errors
 
 
