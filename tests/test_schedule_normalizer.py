@@ -23,6 +23,7 @@ SPEC.loader.exec_module(NORMALIZE)
 INPUT = ROOT / "evals/fixtures/synthetic-schedule-input.xlsx"
 MANUAL = ROOT / "evals/fixtures/synthetic-manual-schedule.xlsx"
 CONFIG = ROOT / "config/teacher-schedule.json"
+SKILL = ROOT / ".agents/skills/xdf-normalize-teacher-schedule/SKILL.md"
 
 
 class ScheduleNormalizerTest(unittest.TestCase):
@@ -525,6 +526,28 @@ class ScheduleNormalizerTest(unittest.TestCase):
                 NORMALIZE.load_config(base, overlay)
             with self.assertRaisesRegex(ValueError, "template_policy"):
                 self.run_case(INPUT, root / "out", template_policy="unknown")
+
+    def test_skill_overview_documents_trigger_modes_feedback_loop_and_current_logic(self):
+        text = SKILL.read_text(encoding="utf-8")
+        required_sections = {
+            "## 何时触发",
+            "## 当前排课逻辑",
+            "## 规则优先与模板优先如何切换",
+            "## 第一版课表回传后的 AI 处理",
+            "## 后续规则如何变化",
+        }
+        for section in required_sections:
+            self.assertIn(section, text)
+        for rule in (
+            "首次运行没有人工模板时固定采用 `rule_first`",
+            "未明确时保持 `rule_first`",
+            "不会被 AI 暗中“学习”为通用规则",
+            "模板记录与业务规则必须分开",
+            "数据源有但模板没有",
+            "当前人数唯一最多的班临时入表",
+            "计划新班不属于“教务正式班位置冲突”",
+        ):
+            self.assertIn(rule, text)
 
 
 if __name__ == "__main__":
